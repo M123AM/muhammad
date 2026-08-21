@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر أغلفة الكتب</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2e8b57;
+            color: #fff;
+            text-align: center;
+        }
+        header { padding: 20px; }
+        
+        /* تحسين التنسيق باستخدام Flexbox للتماشي مع كافة الشاشات */
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .product, .idea-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border: 1px solid #fff;
+            border-radius: 8px;
+            width: 300px;
+        }
+        
+        textarea { 
+            width: 90%; 
+            height: 100px; 
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        button {
+            background-color: #fff;
+            color: #2e8b57;
+            border: none;
+            padding: 10px 15px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .cart-section { 
+            margin-top: 30px; 
+            padding: 20px;
+        }
+        
+        #timer {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>متجر أغلفة الكتب</h1>
+</header>
+
+<main>
+    <section class="product">
+        <h2>غلاف كتاب مخصص</h2>
+        <p>السعر: 50 دولار</p>
+        <button onclick="alert('تمت إضافة المنتج للسلة')">إضافة إلى السلة</button>
+    </section>
+
+    <section class="idea-box">
+        <h2>أدخل فكرة غلاف كتابك</h2>
+        <textarea id="ideaInput" placeholder="اكتب فكرتك هنا..."></textarea>
+        <br>
+        <button onclick="startDesignProcess()">إرسال الفكرة للمصممين</button>
+        <div id="timer"></div>
+    </section>
+</main>
+
+<section class="cart-section">
+    <h2>سلة التسوق</h2>
+    <button onclick="alert('الدفع بواسطة البطاقة')">الدفع الإلكتروني</button>
+</section>
+
+<script>
+    function startDesignProcess() {
+        const idea = document.getElementById('ideaInput').value;
+        if (idea.trim() === '') {
+            alert('يرجى كتابة الفكرة أولاً.');
+            return;
+        }
+        
+        let timeLeft = 5;
+        const timerDisplay = document.getElementById('timer');
+        timerDisplay.style.display = 'block';
+        timerDisplay.innerText = `جاري المعالجة... 00:0${timeLeft}`;
+        
+        const countdown = setInterval(() => {
+            timeLeft--;
+            if (timeLeft > 0) {
+                timerDisplay.innerText = `جاري المعالجة... 00:0${timeLeft}`;
+            } else {
+                clearInterval(countdown);
+                timerDisplay.innerText = 'تم رفع التصميم بنجاح للمصممين وسيصلك التحديث عبر الجيميل!';
+            }
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
